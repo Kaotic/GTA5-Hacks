@@ -10,5 +10,9 @@ namespace Kaotic {
 		static float GetBoost();
 		static float GetAcceleration();
 		static void HornBoost();
+		static void MaxCar();
+		static void SetPlate(const char* plate);
+		static void FlipCar();
+		static natives::Vehicle SpawnVehicle(char* modelg, natives::Vector3 coords, float heading = 0.0f);
 	};
 }

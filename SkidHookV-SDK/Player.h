@@ -10,6 +10,7 @@ namespace Kaotic {
 		static void SuperJump();
 		static void TeleportToCoords( natives::Vector3 Coords);
 		static void PlayerToCoords(natives::Player player, natives::Vector3 target);
+		static void CleanPlayer();
 		static bool GetGodmode();
 		static bool GetNoRagdoll();
 		static int GetWantedLevel();

@@ -149,7 +149,8 @@
       <GenerateDebugInformation>true</GenerateDebugInformation>
     </Link>
     <PostBuildEvent>
-      <Command>copy /Y "$(TargetDir)$(TargetName).skd" "D:\Jeux\Rockstar Games\Grand Theft Auto V\$(TargetName).skd"</Command>
+      <Command>
+      </Command>
     </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemGroup>
@@ -161,6 +162,7 @@
     <ClInclude Include="MenuOption.h" />
     <ClInclude Include="natives.h" />
     <ClInclude Include="native_caller.h" />
+    <ClInclude Include="Online.h" />
     <ClInclude Include="OriginBaseV2.h" />
     <ClInclude Include="Player.h" />
     <ClInclude Include="Recovery.h" />
@@ -177,6 +179,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="dllmain.cpp" />
+    <ClCompile Include="Online.cpp" />
     <ClCompile Include="OriginBaseV2.cpp" />
     <ClCompile Include="Player.cpp" />
     <ClCompile Include="Recovery.cpp" />

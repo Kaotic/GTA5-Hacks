@@ -1,5 +1,39 @@
 #include "stdafx.h"
 
+//Set Value
+void Kaotic::Vehicle::SetBoost(float boost)
+{
+	memory::set_value<float>({ 0x08, 0xD28, 0x320 }, boost);
+}
+
+void Kaotic::Vehicle::SetAcceleration(float acceleration)
+{
+	memory::set_value<float>({ 0x08, 0xD28, 0x8C8, 0x4C }, acceleration);
+}
+void Kaotic::Vehicle::SetPlate(const char* plate) {
+	natives::Vehicle vehicle = natives::ped::get_vehicle_ped_is_in(natives::player::player_ped_id(), false);
+	natives::vehicle::set_vehicle_number_plate_text(vehicle, plate);
+}
+//Set Value
+
+//Get Value
+bool Kaotic::Vehicle::GetGodmode()
+{
+	return memory::get_value<bool>({ 0x08, 0xD28, 0x189 });
+}
+
+float Kaotic::Vehicle::GetBoost()
+{
+	return memory::get_value<float>({ 0x08, 0xD28, 0x320 });
+}
+
+float Kaotic::Vehicle::GetAcceleration()
+{
+	return memory::get_value<float>({ 0x08, 0xD28, 0x8C8, 0x4C });
+}
+//Get Value
+
+
 void Kaotic::Vehicle::Godmode(bool state)
 {
 	memory::set_value<bool>({ 0x08, 0xD28, 0x189 }, state);
@@ -49,33 +83,6 @@ void Kaotic::Vehicle::TankGodmode(bool toggle)
 	}
 }
 
-void Kaotic::Vehicle::SetBoost(float boost)
-{
-	memory::set_value<float>({ 0x08, 0xD28, 0x320 }, boost);
-}
-
-void Kaotic::Vehicle::SetAcceleration(float acceleration)
-{
-	memory::set_value<float>({ 0x08, 0xD28, 0x8C8, 0x4C }, acceleration);
-}
-//Set Value
-
-//Get Value
-bool Kaotic::Vehicle::GetGodmode()
-{
-	return memory::get_value<bool>({ 0x08, 0xD28, 0x189 });
-}
-
-float Kaotic::Vehicle::GetBoost()
-{
-	return memory::get_value<float>({ 0x08, 0xD28, 0x320 });
-}
-
-float Kaotic::Vehicle::GetAcceleration()
-{
-	return memory::get_value<float>({ 0x08, 0xD28, 0x8C8, 0x4C });
-}
-
 void Kaotic::Vehicle::HornBoost() {
 	if (natives::player::is_player_pressing_horn(natives::player::player_id()))
 	{
@@ -86,4 +93,24 @@ void Kaotic::Vehicle::HornBoost() {
 			natives::vehicle::set_vehicle_forward_speed(Veh, 60);
 		}
 	}
+}
+
+void Kaotic::Vehicle::MaxCar() {
+	natives::Vehicle vehicle = natives::ped::get_vehicle_ped_is_in(natives::player::player_ped_id(), false);
+	natives::vehicle::set_vehicle_mod_kit(vehicle, 0);
+
+	for (int i = 0; i < 50; i++)
+	{
+		natives::vehicle::set_vehicle_mod(vehicle, i, natives::vehicle::get_num_vehicle_mods(vehicle, i) - 1, false);
+	}
+	natives::vehicle::set_vehicle_number_plate_text(vehicle, "Kaotic");
+}
+
+void Kaotic::Vehicle::FlipCar() {
+	natives::Vehicle vehicle = natives::ped::get_vehicle_ped_is_in(natives::player::player_ped_id(), false);
+	natives::vehicle::set_vehicle_on_ground_properly(vehicle);
+}
+
+natives::Vehicle Kaotic::Vehicle::SpawnVehicle(char* modelg, natives::Vector3 coords, float heading) {
+	//SPAWN VEHICLE FUNCTION
 }

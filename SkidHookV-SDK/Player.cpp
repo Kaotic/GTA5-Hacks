@@ -39,19 +39,15 @@ void Kaotic::Player::TeleportToCoords(natives::Vector3 Coords) {
 	memory::set_value<float>({ 0x8, 0x30, 0x58 }, Coords.z);
 }
 
+void Kaotic::Player::CleanPlayer() {
+	natives::Ped Ped = natives::player::player_ped_id();
+	natives::ped::clear_ped_blood_damage(Ped);
+	natives::ped::reset_ped_visible_damage(Ped);
+}
+
 void Kaotic::Player::PlayerToCoords(natives::Player player, natives::Vector3 target)
 {
-	for (int iz = 0; iz < 2; iz++)
-	{
-		natives::Ped destPed = natives::player::get_player_ped_script_index(player);
-		natives::Vector3 ourLoc = target;
-		natives::ai::clear_ped_tasks_immediately(destPed);
-		int netScene = natives::network::network_create_synchronised_scene(ourLoc.x, ourLoc.y, ourLoc.z, 0.f, 0.f, 0.f, 0, 0, 0, 0.f);
-		natives::network::network_add_ped_to_synchronised_scene(destPed, netScene, "amb@code_human_cower@female@base", "base", 8.f, -8.f, 2, 0, 100.f, 0);
-		natives::network::network_start_synchronised_scene(netScene);
-		natives::ai::clear_ped_tasks_immediately(destPed);
-		natives::network::network_stop_synchronised_scene(netScene);
-	}
+	//Teleport to Coords function
 }
 
 bool Kaotic::Player::GetGodmode()
